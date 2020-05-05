@@ -1,10 +1,13 @@
 package com.agm.issuemanagement.util;
 
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Sort;
 
 import java.util.List;
 
+@Data
 public class TPage<T> {
     private int number;
     private int size;
