@@ -17,10 +17,10 @@ public class Project  extends BaseEntity{
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Column(name = "uname", length = 100, unique = true)
+    @Column(name = "project_code", length = 100, unique = true)
     private String projectCode;
 
-    @Column(name = "pwd", length = 200)
+    @Column(name = "project_name", length = 200)
     private String projectName;
 
     @JoinColumn(name = "manager_user_id")

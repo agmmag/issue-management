@@ -1,8 +1,10 @@
 package com.agm.issuemanagement.service.impl;
 
+import com.agm.issuemanagement.dto.ProjectDto;
 import com.agm.issuemanagement.entity.Project;
 import com.agm.issuemanagement.repository.ProjectRepository;
 import com.agm.issuemanagement.service.ProjectService;
+import org.modelmapper.ModelMapper;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -13,22 +15,28 @@ import java.util.List;
 public class ProjectServiceImpl implements ProjectService {
 
     private final ProjectRepository projectRepository;
+    private final ModelMapper modelMapper;
 
-    public ProjectServiceImpl(ProjectRepository projectRepository) {
+    public ProjectServiceImpl(ProjectRepository projectRepository, ModelMapper modelMapper) {
         this.projectRepository = projectRepository;
+        this.modelMapper = modelMapper;
     }
 
     @Override
-    public Project save(Project project) {
-        if(project.getProjectCode() == null){
-            throw new IllegalArgumentException("Project code cannot be null!");
+    public ProjectDto save(ProjectDto project) {
+        if(projectRepository.getByProjectCode(project.getProjectCode()) != null){
+            throw new IllegalArgumentException("Project code already exists!");
         }
-        return projectRepository.save(project);
+        Project p = modelMapper.map(project, Project.class);
+        p = projectRepository.save(p);
+        project.setId(p.getId());
+        return project;
     }
 
     @Override
-    public Project getById(Long id) {
-        return projectRepository.getOne(id);
+    public ProjectDto getById(Long id) {
+        Project p = projectRepository.getOne(id);
+        return modelMapper.map(p, ProjectDto.class);
     }
 
     @Override
@@ -37,8 +45,9 @@ public class ProjectServiceImpl implements ProjectService {
     }
 
     @Override
-    public List<Project> getByProjectCode(Long id) {
-        return null;
+    public ProjectDto getByProjectCode(String id) {
+        Project p = projectRepository.getByProjectCode(id);
+        return modelMapper.map(p, ProjectDto.class);
     }
 
     @Override
@@ -47,7 +56,30 @@ public class ProjectServiceImpl implements ProjectService {
     }
 
     @Override
-    public Boolean delete(Project project) {
+    public Boolean delete(ProjectDto project) {
         return null;
+    }
+
+    @Override
+    public Boolean delete(Long id) {
+        projectRepository.deleteById(id);
+        return true;
+    }
+
+    @Override
+    public ProjectDto update(Long id, ProjectDto project) {
+        Project projectDb = projectRepository.getOne(id);
+        if(projectDb == null)
+            throw new IllegalArgumentException("Project does not exist!");
+
+        Project projectCheck = projectRepository.getByProjectCodeAndIdNot(project.getProjectCode(), id);
+        if(projectCheck != null){
+            throw new IllegalArgumentException("Project code already exists!");
+        }
+
+        projectDb.setProjectCode(project.getProjectCode());
+        projectDb.setProjectName(project.getProjectName());
+        projectRepository.save(projectDb);
+        return modelMapper.map(projectDb, ProjectDto.class);
     }
 }
