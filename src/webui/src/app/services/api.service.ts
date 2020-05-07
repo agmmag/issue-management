@@ -26,6 +26,9 @@ export class ApiService {
   delete2 (path: string, params: HttpParams = new HttpParams()): Observable<any>{
     return this.delete(path, {params}).pipe(catchError(this.formatError));
   }
+  delete4 (path: string, params: HttpParams = new HttpParams()): Observable<any>{
+    return this.delete(path, {params}).pipe(catchError(this.formatError));
+  }
 
   private formatError(error: any){
     return Observable.of(error.error);
