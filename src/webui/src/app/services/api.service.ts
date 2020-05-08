@@ -1,13 +1,13 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders, HttpParams} from "@angular/common/http";
-import {Observable} from "rxjs/Rx";
+import {Observable} from 'rxjs';
+import 'rxjs/add/observable/of';
 import {catchError} from "rxjs/internal/operators";
 import {environment} from "../../environments/environment";
 
 @Injectable({
   providedIn: 'root'
 })
-//Guncelleme
 export class ApiService {
 
   private httpOptions = {
