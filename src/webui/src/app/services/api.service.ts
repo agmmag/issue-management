@@ -7,6 +7,7 @@ import {environment} from "../../environments/environment";
 @Injectable({
   providedIn: 'root'
 })
+//Guncelleme
 export class ApiService {
 
   private httpOptions = {
