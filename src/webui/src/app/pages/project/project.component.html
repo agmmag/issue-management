@@ -9,7 +9,7 @@
     [rowHeight]="'auto'"
     [externalPaging]="true"
     [count]="page.totalElements"
-    [offset]="page.number"
+    [offset]="page.page"
     [limit]="page.size"
     (page)='setPage($event)'>
   </ngx-datatable>
