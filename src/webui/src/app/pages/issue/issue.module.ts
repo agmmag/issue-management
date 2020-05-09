@@ -3,11 +3,13 @@ import {CommonModule} from '@angular/common';
 import {IssueComponent} from './issue.component';
 import {IssueRoutingModule} from "./issue.routing.module";
 import {IssueService} from "../../services/shared/issue.service";
+import {SharedModule} from "../../shared/shared.module";
 
 @NgModule({
   imports: [
     CommonModule,
-    IssueRoutingModule
+    IssueRoutingModule,
+    SharedModule
   ],
   providers: [IssueService],
   declarations: [IssueComponent]
