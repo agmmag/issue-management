@@ -16,6 +16,7 @@ import java.util.List;
 @RestController
 @RequestMapping(ApiPaths.UserCtrl.CTRL)
 @Api(value = ApiPaths.UserCtrl.CTRL, description = "User APIs")
+@CrossOrigin
 public class UserController {
 
     private final UserServiceImpl userServiceImpl;

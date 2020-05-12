@@ -2,7 +2,9 @@ package com.agm.issuemanagement.service.impl;
 
 import com.agm.issuemanagement.dto.ProjectDto;
 import com.agm.issuemanagement.entity.Project;
+import com.agm.issuemanagement.entity.User;
 import com.agm.issuemanagement.repository.ProjectRepository;
+import com.agm.issuemanagement.repository.UserRepository;
 import com.agm.issuemanagement.service.ProjectService;
 import com.agm.issuemanagement.util.TPage;
 import org.modelmapper.ModelMapper;
@@ -18,19 +20,23 @@ public class ProjectServiceImpl implements ProjectService {
 
     private final ProjectRepository projectRepository;
     private final ModelMapper modelMapper;
+    private final UserRepository userRepository;
 
-    public ProjectServiceImpl(ProjectRepository projectRepository, ModelMapper modelMapper) {
+    public ProjectServiceImpl(ProjectRepository projectRepository, ModelMapper modelMapper, UserRepository userRepository) {
         this.projectRepository = projectRepository;
         this.modelMapper = modelMapper;
+        this.userRepository = userRepository;
     }
 
     @Override
     public ProjectDto save(ProjectDto project) {
-        if(projectRepository.getByProjectCode(project.getProjectCode()) != null){
+        if (projectRepository.getByProjectCode(project.getProjectCode()) != null) {
             throw new IllegalArgumentException("Project code already exists!");
         }
         Project p = modelMapper.map(project, Project.class);
         p = projectRepository.save(p);
+        User user = userRepository.getOne(project.getManagerId());
+        p.setManager(user);
         project.setId(p.getId());
         return project;
     }
@@ -75,11 +81,11 @@ public class ProjectServiceImpl implements ProjectService {
     @Override
     public ProjectDto update(Long id, ProjectDto project) {
         Project projectDb = projectRepository.getOne(id);
-        if(projectDb == null)
+        if (projectDb == null)
             throw new IllegalArgumentException("Project does not exist!");
 
         Project projectCheck = projectRepository.getByProjectCodeAndIdNot(project.getProjectCode(), id);
-        if(projectCheck != null){
+        if (projectCheck != null) {
             throw new IllegalArgumentException("Project code already exists!");
         }
 
