@@ -1,92 +1,14 @@
 [
   {
-    "_class": "com.agm.issuemanagement.entity.Project",
-    "projectCode" : "IM1",
-    "projectName": "Issue Management Project1"
+  "_class": "com.agm.issuemanagement.entity.User",
+  "username" : "temelt",
+  "nameSurname": "Taner TEMEL",
+  "email":"taner.temelt@gmail.com"
   },
   {
-    "_class": "com.agm.issuemanagement.entity.Project",
-    "projectCode" : "ERP-S2",
-    "projectName": "ERP Project for Sales2"
-  },
-  {
-    "_class": "com.agm.issuemanagement.entity.Project",
-    "projectCode" : "CRM-S3",
-    "projectName": "CRM Project for Sales3"
-  },
-  {
-    "_class": "com.agm.issuemanagement.entity.Project",
-    "projectCode" : "IM4",
-    "projectName": "Issue Management Project4"
-  },
-  {
-    "_class": "com.agm.issuemanagement.entity.Project",
-    "projectCode" : "ERP-S5",
-    "projectName": "ERP Project for Sales5"
-  },
-  {
-    "_class": "com.agm.issuemanagement.entity.Project",
-    "projectCode" : "CRM-S6",
-    "projectName": "CRM Project for Sales6"
-  },
-  {
-    "_class": "com.agm.issuemanagement.entity.Project",
-    "projectCode" : "IM7",
-    "projectName": "Issue Management Project7"
-  },
-  {
-    "_class": "com.agm.issuemanagement.entity.Project",
-    "projectCode" : "ERP-S8",
-    "projectName": "ERP Project for Sales8"
-  },
-  {
-    "_class": "com.agm.issuemanagement.entity.Project",
-    "projectCode" : "CRM-S9",
-    "projectName": "CRM Project for Sales9"
-  },
-  {
-    "_class": "com.agm.issuemanagement.entity.Project",
-    "projectCode" : "IM10",
-    "projectName": "Issue Management Project10"
-  },
-  {
-    "_class": "com.agm.issuemanagement.entity.Project",
-    "projectCode" : "ERP-S11",
-    "projectName": "ERP Project for Sales11"
-  },
-  {
-    "_class": "com.agm.issuemanagement.entity.Project",
-    "projectCode" : "CRM-S12",
-    "projectName": "CRM Project for Sales12"
-  },
-  {
-    "_class": "com.agm.issuemanagement.entity.Project",
-    "projectCode" : "IM13",
-    "projectName": "Issue Management Project13"
-  },
-  {
-    "_class": "com.agm.issuemanagement.entity.Project",
-    "projectCode" : "ERP-S14",
-    "projectName": "ERP Project for Sales14"
-  },
-  {
-    "_class": "com.agm.issuemanagement.entity.Project",
-    "projectCode" : "CRM-S15",
-    "projectName": "CRM Project for Sales15"
-  },
-  {
-    "_class": "com.agm.issuemanagement.entity.Project",
-    "projectCode" : "IM16",
-    "projectName": "Issue Management Project16"
-  },
-  {
-    "_class": "com.agm.issuemanagement.entity.Project",
-    "projectCode" : "ERP-S17",
-    "projectName": "ERP Project for Sales17"
-  },
-  {
-    "_class": "com.agm.issuemanagement.entity.Project",
-    "projectCode" : "CRM-S18",
-    "projectName": "CRM Project for Sales18"
+    "_class": "com.agm.issuemanagement.entity.User",
+    "username" : "jdoe",
+    "nameSurname": "John Doe",
+    "email":"jdoe@gmail.com"
   }
 ]

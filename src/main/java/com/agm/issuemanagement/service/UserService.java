@@ -1,17 +1,18 @@
 package com.agm.issuemanagement.service;
 
+import com.agm.issuemanagement.dto.UserDto;
 import com.agm.issuemanagement.entity.User;
-import org.springframework.data.domain.Page;
+import com.agm.issuemanagement.util.TPage;
 import org.springframework.data.domain.Pageable;
 
 public interface UserService {
-    User save(User user);
+    UserDto save(UserDto user);
 
-    User getById (Long id);
+    UserDto getById(Long id);
 
-    Page<User> getAllPageable(Pageable pageable);
+    TPage<UserDto> getAllPageable(Pageable pageable);
 
-    User getByUsername(String username);
+    UserDto getByUsername(String username);
 
     Boolean delete(User user);
 }
