@@ -34,9 +34,9 @@ public class ProjectServiceImpl implements ProjectService {
             throw new IllegalArgumentException("Project code already exists!");
         }
         Project p = modelMapper.map(project, Project.class);
-        p = projectRepository.save(p);
         User user = userRepository.getOne(project.getManagerId());
         p.setManager(user);
+        p = projectRepository.save(p);
         project.setId(p.getId());
         return project;
     }
