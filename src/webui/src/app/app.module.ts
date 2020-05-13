@@ -14,6 +14,7 @@ import {ApiService} from "./services/api.service";
 import {HttpClient, HttpClientModule} from "@angular/common/http";
 import {AppComponent} from "./app.component";
 import {IssueHistoryService} from "./services/shared/issue.history.service";
+import {NotfoundComponent} from "./shared/notfound/notfound.component";
 
 export const createTranslateLoader = (http: HttpClient) => {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -25,7 +26,8 @@ export const createTranslateLoader = (http: HttpClient) => {
     AppLayoutComponent,
     FooterComponent,
     HeaderComponent,
-    SidebarComponent
+    SidebarComponent,
+    NotfoundComponent
   ],
   imports: [
     BrowserModule,

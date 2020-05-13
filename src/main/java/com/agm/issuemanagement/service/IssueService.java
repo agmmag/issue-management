@@ -2,7 +2,6 @@ package com.agm.issuemanagement.service;
 
 import com.agm.issuemanagement.dto.IssueDto;
 import com.agm.issuemanagement.util.TPage;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 

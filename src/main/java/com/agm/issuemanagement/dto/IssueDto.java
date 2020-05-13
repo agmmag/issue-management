@@ -27,5 +27,5 @@ public class IssueDto {
     @ApiModelProperty(required = true, value = "Assignee")
     private UserDto assignee;
     @ApiModelProperty(required = true, value = "Project")
-    private ProjectDto projectDto;
+    private ProjectDto project;
 }
