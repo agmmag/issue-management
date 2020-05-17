@@ -1,43 +1,59 @@
 package com.agm.issuemanagement.service.impl;
 
+import com.agm.issuemanagement.dto.IssueHistoryDto;
 import com.agm.issuemanagement.entity.IssueHistory;
 import com.agm.issuemanagement.repository.IssueHistoryRepository;
 import com.agm.issuemanagement.service.IssueHistoryService;
+import com.agm.issuemanagement.util.TPage;
+import org.modelmapper.ModelMapper;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+
+import java.util.Arrays;
+import java.util.List;
 
 @Service
 public class IssueHistoryServiceImpl implements IssueHistoryService {
 
     private final IssueHistoryRepository issueHistoryRepository;
+    private final ModelMapper modelMapper;
 
-    public IssueHistoryServiceImpl(IssueHistoryRepository issueHistoryRepository) {
+    public IssueHistoryServiceImpl(IssueHistoryRepository issueHistoryRepository, ModelMapper modelMapper) {
         this.issueHistoryRepository = issueHistoryRepository;
+        this.modelMapper = modelMapper;
     }
 
     @Override
-    public IssueHistory save(IssueHistory issueHistory) {
-        if(issueHistory.getDate() == null){
-            throw new IllegalArgumentException("Issue date cannot be null!");
-        }
-        issueHistory = issueHistoryRepository.save(issueHistory);
-        return issueHistory;
+    public IssueHistoryDto save(IssueHistoryDto issueHistory) {
+        IssueHistory ih = modelMapper.map(issueHistory, IssueHistory.class);
+        ih = issueHistoryRepository.save(ih);
+        issueHistory.setId(ih.getId());
+        return  issueHistory;
     }
 
     @Override
-    public IssueHistory getById(Long id) {
-        return issueHistoryRepository.getOne(id);
+    public IssueHistoryDto getById(Long id) {
+        IssueHistory ih = issueHistoryRepository.getOne(id);
+        return modelMapper.map(ih, IssueHistoryDto.class);
     }
 
     @Override
-    public Page<IssueHistory> getAllPageable(Pageable pageable) {
-        return issueHistoryRepository.findAll(pageable);
+    public List<IssueHistoryDto> getByIssueId(Long id) {
+        return Arrays.asList(modelMapper.map(issueHistoryRepository.getByIssueId(id), IssueHistoryDto[].class));
     }
 
     @Override
-    public Boolean delete(IssueHistory issueHistory) {
-        issueHistoryRepository.delete(issueHistory);
+    public TPage<IssueHistoryDto> getAllPageable(Pageable pageable) {
+        Page<IssueHistory> data = issueHistoryRepository.findAll(pageable);
+        TPage<IssueHistoryDto> res = new TPage<>();
+        res.setStat(data, Arrays.asList(modelMapper.map(data.getContent(), IssueHistoryDto[].class)));
+        return res;
+    }
+
+    @Override
+    public Boolean delete(IssueHistoryDto issueHistory) {
+        issueHistoryRepository.deleteById(issueHistory.getId());
         return Boolean.TRUE;
     }
 }

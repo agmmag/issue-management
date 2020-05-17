@@ -66,7 +66,8 @@ export class ProjectComponent implements OnInit {
     this.projectService.createProject(this.projectForm.value).subscribe(
       response => {
         this.setPage({offset: 0});
-        this.closeAndResetModal();      }
+        this.closeAndResetModal();
+      }
     )
   }
 
@@ -77,7 +78,7 @@ export class ProjectComponent implements OnInit {
 
   setPage(pageInfo) {
     this.page.page = pageInfo.offset;
-    this.projectService.getAll(this.page).subscribe(pagedData => {
+    this.projectService.getAllPageable(this.page).subscribe(pagedData => {
       this.page.size = pagedData.size;
       this.page.page = pagedData.page;
       this.page.totalElements = pagedData.totalElements;

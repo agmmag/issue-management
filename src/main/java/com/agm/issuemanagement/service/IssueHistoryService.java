@@ -1,17 +1,21 @@
 package com.agm.issuemanagement.service;
 
-import com.agm.issuemanagement.entity.IssueHistory;
-import com.agm.issuemanagement.entity.User;
-import org.springframework.data.domain.Page;
+import com.agm.issuemanagement.dto.IssueHistoryDto;
+import com.agm.issuemanagement.util.TPage;
 import org.springframework.data.domain.Pageable;
+
+import java.util.List;
 
 public interface IssueHistoryService {
 
-    IssueHistory save(IssueHistory issueHistory);
+    IssueHistoryDto save(IssueHistoryDto issueHistory);
 
-    IssueHistory getById (Long id);
+    IssueHistoryDto getById(Long id);
 
-    Page<IssueHistory> getAllPageable(Pageable pageable);
+    List<IssueHistoryDto> getByIssueId(Long id);
 
-    Boolean delete(IssueHistory issueHistory);
+    TPage<IssueHistoryDto> getAllPageable(Pageable pageable);
+
+    Boolean delete(IssueHistoryDto issueHistory);
 }
+

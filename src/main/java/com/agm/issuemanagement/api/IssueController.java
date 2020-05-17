@@ -1,5 +1,6 @@
 package com.agm.issuemanagement.api;
 
+import com.agm.issuemanagement.dto.IssueDetailDto;
 import com.agm.issuemanagement.dto.IssueDto;
 import com.agm.issuemanagement.service.impl.IssueServiceImpl;
 import com.agm.issuemanagement.util.ApiPaths;
@@ -36,6 +37,13 @@ public class IssueController {
     public ResponseEntity<IssueDto> getById(@PathVariable(value = "id", required = true) Long id) {
         IssueDto issueDto = issueServiceImpl.getById(id);
         return ResponseEntity.ok(issueDto);
+    }
+
+    @GetMapping("/detail/{id}")
+    @ApiOperation(value = "Get By Id Operation", response = IssueDetailDto.class)
+    public ResponseEntity<IssueDetailDto> getByIdWithDetails(@PathVariable(value = "id", required = true) Long id){
+        IssueDetailDto detailDto = issueServiceImpl.getByIdWithDetails(id);
+        return ResponseEntity.ok(detailDto);
     }
 
     @PostMapping
