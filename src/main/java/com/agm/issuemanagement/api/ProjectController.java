@@ -12,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @RestController
 @RequestMapping(ApiPaths.ProjectCtrl.CTRL)
@@ -28,14 +29,21 @@ public class ProjectController {
 
     @GetMapping("/pagination")
     @ApiOperation(value = "Get By Pagination Operation", response = ProjectDto.class)
-    public ResponseEntity<TPage<ProjectDto>> getAllByPagination(Pageable pageable){
+    public ResponseEntity<TPage<ProjectDto>> getAllByPagination(Pageable pageable) {
         TPage<ProjectDto> data = projectServiceImpl.getAllPageable(pageable);
+        return ResponseEntity.ok(data);
+    }
+
+    @GetMapping()
+    @ApiOperation(value = "Get All Operation", response = ProjectDto.class, responseContainer = "List")
+    public ResponseEntity<List<ProjectDto>> getAll() {
+        List<ProjectDto> data = projectServiceImpl.getAll();
         return ResponseEntity.ok(data);
     }
 
     @GetMapping("/{id}")
     @ApiOperation(value = "Get By Id Operation", response = ProjectDto.class)
-    public ResponseEntity<ProjectDto> getById(@PathVariable(value = "id", required = true) Long id){
+    public ResponseEntity<ProjectDto> getById(@PathVariable(value = "id", required = true) Long id) {
         log.info("ProjectController -> GetById ");
         log.debug("ProjectController -> GetById -> PARAM:" + id);
         ProjectDto projectDto = projectServiceImpl.getById(id);
