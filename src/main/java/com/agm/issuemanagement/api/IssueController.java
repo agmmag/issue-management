@@ -2,6 +2,7 @@ package com.agm.issuemanagement.api;
 
 import com.agm.issuemanagement.dto.IssueDetailDto;
 import com.agm.issuemanagement.dto.IssueDto;
+import com.agm.issuemanagement.dto.IssueUpdateDto;
 import com.agm.issuemanagement.entity.IssueStatus;
 import com.agm.issuemanagement.service.impl.IssueServiceImpl;
 import com.agm.issuemanagement.util.ApiPaths;
@@ -56,9 +57,10 @@ public class IssueController {
     }
 
     @PutMapping("/{id}")
-    @ApiOperation(value = "Update Operation", response = IssueDto.class)
-    public ResponseEntity<IssueDto> updateIssue(@PathVariable(value = "id", required = true) Long id, @Valid @RequestBody IssueDto issue) {
-        return ResponseEntity.ok(issueServiceImpl.update(id, issue));
+    @ApiOperation(value = "Update Operation", response = IssueUpdateDto.class)
+    public ResponseEntity<IssueUpdateDto> updateIssue(@PathVariable(value = "id", required = true) Long id, @Valid @RequestBody IssueUpdateDto issue) {
+        System.out.println(issue);
+        return ResponseEntity.ok(null);
     }
 
     @DeleteMapping("/{id}")
